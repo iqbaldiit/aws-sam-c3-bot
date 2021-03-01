@@ -1,0 +1,54 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  cloud-camp
+
+  Sample SAM Template for cloud-camp
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 60
+
+Parameters:
+  BucketName:
+    Type: String
+    Default: mmi-cloud-camp-sam
+    Description: Name of s3 Bucket where you upload your csv file
+  
+  TableName:
+    Type: String
+    Default: mmi-c3-bot-intent-sam
+    Description: Name of the dynamo db table where you store user intents
+
+Resources:
+  ChatBotFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: chat_bot/
+      Handler: read_file.lambda_handler
+      Runtime: python3.8
+      Role: arn:aws:iam::185627371157:role/lambda-s3-dynamodb
+
+  ChatBotBucket:
+    Type: AWS::S3::Bucket  
+    Properties:
+      BucketName: !Ref BucketName #mmi-cloud-camp-sam
+      AccessControl: PublicRead
+      
+  ChatBotDynamoDBTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref TableName #mmi-c3-bot-intent-sam 
+      AttributeDefinitions: 
+        - AttributeName: intent-id
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: intent-id
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+
+          
+        
