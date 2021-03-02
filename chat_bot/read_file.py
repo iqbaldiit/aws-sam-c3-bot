@@ -7,19 +7,19 @@ import uuid
 
 
 def lambda_handler(event, context):
-    #user_input=event['currentIntent']['slots']['user_input']
-    final_result= answer(event['user_input'])
-    # response={
-    #     "dialogAction":{
-    #         "type":"Close",
-    #         "fulfillmentState":"Fulfilled",
-    #         "message":{
-    #             "contentType":"SSML",
-    #             "content":"{}".format(final_result)
-    #         }
-    #     }
-    # }
-    return final_result
+    user_input=event['currentIntent']['slots']['user_input']
+    final_result= answer(user_input)
+    response={
+        "dialogAction":{
+            "type":"Close",
+            "fulfillmentState":"Fulfilled",
+            "message":{
+                "contentType":"SSML",
+                "content":"{}".format(final_result)
+            }
+        }
+    }
+    return response
 
 s3_client=boto3.client('s3') 
 dynamodb=boto3.client('dynamodb',region_name='us-east-1')
