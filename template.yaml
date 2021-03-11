@@ -28,7 +28,7 @@ Resources:
       CodeUri: chat_bot/
       Handler: read_file.lambda_handler
       Runtime: python3.8
-      Role: arn:aws:iam::185627371157:role/lambda-s3-dynamodb
+      Role: //
 
   ChatBotBucket:
     Type: AWS::S3::Bucket  
